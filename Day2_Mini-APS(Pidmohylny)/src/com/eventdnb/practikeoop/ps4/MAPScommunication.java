@@ -1,5 +1,3 @@
-package com.eventdnb.practikeoop.ps4;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,61 +7,96 @@ import javax.swing.*;
 public class MAPScommunication extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	Color color = Color.black;
-	
+	Color color1 = Color.red;
+	Color color2 = Color.blue;
 	
 	int dia = -1;
-    long delay = 10;
+    long delay = 1;
     private int x = 10;
     private int y = 10;
     private int dx = -1;
     private int dy = 1;
     private boolean isRunning;
 
+    int dia1 = -1;
+    long delay1 = 10;
+    private int x1 = 10;
+    private int y1 = 200;
+    private int dx1 = 20;
+    private int dy1 = 10;
+    private boolean isRunning1;
+
+    int dia2 = -1;
+    long delay2 = 10;
+    private int x2 = 200;
+    private int y2 = 10;
+    private int dx2 = 10;
+    private int dy2 = 20;
+    private boolean isRunning2;
+
+
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
+        Graphics2D g1 = (Graphics2D)g;
         Graphics2D g2 = (Graphics2D)g;
         Graphics2D g3 = (Graphics2D)g;
         Graphics2D g4 = (Graphics2D)g;
-       
+        Graphics2D g5 = (Graphics2D)g;
+
+
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(color);
         g.fillOval(x,y,5,5);   // adds color to circle
         g.setColor(Color.black);
         g2.drawOval(x,y,5,5);
-        
+
+        g.setColor(color1);
+        g.fillOval(x1,y1,5,5);   // adds color to circle
+        g.setColor(Color.red);
+        g1.drawOval(x1,y1,5,5);
+
+        g.setColor(color2);
+        g.fillOval(x2,y2,5,5);   // adds color to circle
+        g.setColor(Color.blue);
+        g5.drawOval(x2,y2,5,5);
+
         Color newColor1 = new Color(0, 0, 0);
         g3.setColor(newColor1);
         g3.drawString("Mini-APS", 10, 60);
         g3.drawString("Phone 1", 10, 170);
         g3.drawString("Phone 2", 160, 60);
         g3.drawString("Phone 3", 160, 170);
-        
+
         final Rectangle box1 = new Rectangle(10, 10, 200, 200);
         g.setColor(Color.white);
         g2.draw(box1);
-        
+
         Color newColor = new Color(0, 215, 215);
         g2.setColor(newColor);
         g2.fillRect(10, 10, 30, 30);
-        
+
         Color newColor2 = new Color(95, 158, 160);
         g4.setColor(newColor2);
         g2.fillRect(180, 10, 30, 30);
         g2.fillRect(180, 180, 30, 30);
         g2.fillRect(10, 180, 30, 30);
-        
+
     }
 
     public void run() {
         while(isVisible()) {
             try {
                 Thread.sleep(delay);
-                
+                Thread.sleep(delay1);
+                Thread.sleep(delay2);
+
             } catch(InterruptedException e) {
                 System.out.println("interrupted");
             }
-           
+
            move();
+           move1();
+           move2();
             repaint();
         }
     }
@@ -72,22 +105,45 @@ public class MAPScommunication extends JPanel implements Runnable {
         if (isRunning) {
         if(x + dx < 10 || x + dia + dx > 200) {
             dx *= -1;
-            color = getColor();
+
         }
         if(y + dy < 10 || y + dia + dy > 200) {
             dy *= -1;
-            color = getColor();
+
         }
         x += dx;
         y += dy;
     }
     }
 
-    private Color getColor() {
-        int rval = (int)Math.floor(0);
-        int gval = (int)Math.floor(0);
-        int bval = (int)Math.floor(0);
-        return new Color(rval, gval, bval);
+    public void move1() {
+        if (isRunning1) {
+        if(x1 + dx1 < 10 || x1 + dia1 + dx1 < 200) {
+            dx1 *= -1;
+
+        }
+        if(y1 + dy1 < 10 || y1 + dia1 + dy1 > 200) {
+            dy1 *= -1;
+
+        }
+        x1 += dx1;
+        y1 += dy1;
+    }
+    }
+
+    public void move2() {
+        if (isRunning2) {
+        if(x2 + dx2 < 10 || x2 + dia2 + dx2 > 200) {
+            dx2 *= -1;
+
+        }
+        if(y2 + dy2 > 10 || y2 + dia2 + dy2 < 200) {
+            dy2 *= -1;
+
+        }
+        x2 += dx2;
+        y2 += dy2;
+    }
     }
 
     private void start() {
@@ -118,9 +174,11 @@ public class MAPScommunication extends JPanel implements Runnable {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 test.isRunning = true;
-  
+                test.isRunning1 = true;
+                test.isRunning2 = true;
+
             }
-           
+
         });
 
             JButton stop = new JButton("Pause");
@@ -129,9 +187,11 @@ public class MAPScommunication extends JPanel implements Runnable {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     test.isRunning = false;
-                   
+                    test.isRunning1 = false;
+test.isRunning2 = false;
+
                 }
-               
+
             });
 
             JPanel panel = new JPanel();
@@ -146,13 +206,6 @@ public class MAPScommunication extends JPanel implements Runnable {
             f.setResizable(false);
             f.setLocationRelativeTo(null);
             f.setVisible(true);
-            
-            test.start();
-        }
 
-    });
-
-
-
-}
-}
+test.start();
+        }});}}
