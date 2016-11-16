@@ -1,8 +1,10 @@
 package GroupStudents;
 
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -13,22 +15,9 @@ public class RED21 {
     public static void main(String[] args) {
         Fr f = new Fr();
         f.setVisible(true);
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("image.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image dimg = img.getScaledInstance(800, 508, Image.SCALE_SMOOTH);
-        ImageIcon imageIcon = new ImageIcon(dimg);
-        setContentPane(new JLabel(imageIcon));
+        
 
     }
-
-	private static void setContentPane(JLabel jLabel) {
-		// TODO Auto-generated method stub
-		
-	}
     
 }
  
