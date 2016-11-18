@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="veadtable.Caseta" table="Caseta">
+		 <id name="id" column="id" type="int" >
+		     <generator class="increment"/>
+		 </id>
+	
+	    <property name="name"   column="name" type="java.lang.String" />
+	    <property name="nayava" column="nayava" type="java.lang.Boolean" />
+	    <property name="cost" column="cost" type="java.lang.Double"/>
+	    <property name="zastava"   column="zastava"  type="java.lang.Double"/>
+   </class>
+
+</hibernate-mapping>
